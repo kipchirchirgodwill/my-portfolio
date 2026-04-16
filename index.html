@@ -1,19 +1,590 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        .hero{
-            border: 3px solid red;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Godwill Kipchirchir — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --cream: #f5f0e8;
+      --dark: #1a1a2e;
+      --accent: #e07b39;
+      --accent2: #2d6a4f;
+      --muted: #7a7a8a;
+      --light-line: #e0d9cc;
+    }
+
+   
+
+    body {
+      background: var(--cream);
+      color: var(--dark);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+    
+    }
+    h1, h2, h3 { font-family: 'Playfair Display', serif; }
+
+    
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      background: var(--dark);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 60px 50px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left::before {
+      content: '';
+      position: absolute;
+      width: 350px; height: 350px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(224,123,57,0.18) 0%, transparent 70%);
+      top: -80px; left: -80px;
+    }
+
+    .hero-left::after {
+      content: 'GK';
+      position: absolute;
+      top: 40px; right: 40px;
+      font-family: 'Playfair Display', serif;
+      font-size: 120px;
+      font-weight: 900;
+      color: rgba(255,255,255,0.04);
+      line-height: 1;
+      user-select: none;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 6px 14px;
+      margin-bottom: 28px;
+      width: fit-content;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(42px, 5vw, 72px);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.05;
+      animation: fadeUp 0.9s ease 0.1s both;
+    }
+
+    .hero-name span { color: var(--accent); font-style: italic; }
+
+    .hero-subtitle {
+      margin-top: 18px;
+      font-size: 15px;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 1px;
+      animation: fadeUp 1s ease 0.2s both;
+    }
+
+    .hero-right {
+      background: var(--cream);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 50px 60px;
+      position: relative;
+    }
+
+    .hero-origin {
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      animation: fadeUp 1s ease 0.3s both;
+    }
+
+    .hero-intro {
+      font-size: 17px;
+      line-height: 1.85;
+      color: var(--dark);
+      max-width: 460px;
+      animation: fadeUp 1s ease 0.4s both;
+    }
+
+    .hero-intro strong { font-weight: 500; color: var(--accent2); }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 30px; right: 50px;
+      writing-mode: vertical-rl;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      animation: fadeUp 1.2s ease 0.6s both;
+    }
+
+    .scroll-hint::after {
+      content: '';
+      display: block;
+      width: 1px; height: 50px;
+      background: var(--muted);
+    }
+
+  
+    section { padding: 100px 0; }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 50px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 50px;
+    }
+
+   
+    .timeline { position: relative; padding-left: 40px; }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px; bottom: 0;
+      width: 1px;
+      background: var(--light-line);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 52px;
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: all 0.6s ease;
+    }
+
+    .timeline-item.visible { opacity: 1; transform: translateX(0); }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -44px; top: 8px;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--cream);
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+
+    .timeline-year {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .timeline-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .timeline-text {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #4a4a5a;
+      max-width: 600px;
+    }
+
+    /* PASSION STRIP */
+    .passion-strip {
+      background: var(--dark);
+      color: #fff;
+      padding: 90px 0;
+    }
+
+    .passion-strip .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .passion-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(24px, 3vw, 40px);
+      font-style: italic;
+      line-height: 1.4;
+    }
+
+    .passion-quote span { color: var(--accent); }
+
+    .passion-body { font-size: 15px; line-height: 1.9; color: rgba(255,255,255,0.6); }
+    .passion-body p + p { margin-top: 18px; }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .skill-card {
+      border: 1px solid var(--light-line);
+      padding: 28px 24px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+    }
+
+    .skill-card.visible { opacity: 1; transform: translateY(0); }
+    .skill-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+
+    .skill-icon { font-size: 28px; margin-bottom: 14px; }
+
+    .skill-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .skill-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* HOBBIES */
+    .hobbies-row { display: flex; gap: 20px; flex-wrap: wrap; }
+
+    .hobby-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 26px;
+      border: 1px solid var(--light-line);
+      font-size: 15px;
+      transition: all 0.3s;
+      cursor: default;
+    }
+
+    .hobby-pill:hover { background: var(--dark); color: #fff; border-color: var(--dark); }
+    .hobby-pill span { font-size: 22px; }
+
+    /* DREAMS */
+    .dream-section {
+      background: var(--accent2);
+      color: #fff;
+      padding: 100px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dream-section::before {
+      content: '∞';
+      position: absolute;
+      right: 60px; top: 50%;
+      transform: translateY(-50%);
+      font-size: 300px;
+      color: rgba(255,255,255,0.04);
+      line-height: 1;
+      user-select: none;
+    }
+
+    .dream-section .section-label { color: rgba(255,255,255,0.5); }
+    .dream-section .section-title { color: #fff; }
+
+    .dream-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    .dream-card {
+      background: rgba(255,255,255,0.08);
+      padding: 32px;
+      border-left: 3px solid rgba(255,255,255,0.3);
+    }
+
+    .dream-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 19px;
+      margin-bottom: 12px;
+    }
+
+    .dream-card p { font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.7); }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      padding: 40px;
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+
+    footer strong { color: var(--accent); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-left { padding: 60px 24px 50px; min-height: 50vh; }
+      .hero-right { padding: 40px 24px; }
+      .passion-strip .container { grid-template-columns: 1fr; gap: 40px; }
+      .dream-grid { grid-template-columns: 1fr; }
+      .container { padding: 0 24px; }
+      .scroll-hint { display: none; }
+    }
+
+  </style>
 </head>
 <body>
-    <h1>css recap</h1>
-    <section class="hero">
-        <img src="download (1).jpg" alt="">
-    </section>
+
+
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-tag">Portfolio · About Me</div>
+      <h1 class="hero-name">Godwill<br/><span>Kipchirchir</span></h1>
+      <p class="hero-subtitle">Full Stack Developer · Eldoret, Kenya</p>
+    </div>
+    <div class="hero-right">
+      <p class="hero-origin"> Born & Raised · Kapseret, Uasin Gishu</p>
+      <p class="hero-intro">
+        A dreamer from the heart of Kenya, building the future one line of code at a time.
+        From childhood games in Kapseret to hackathon projects and full-stack development —
+        this is the story of <strong>Godwill Kipchirchir</strong>.
+      </p>
+      <div class="scroll-hint">Scroll</div>
+    </div>
+  </div>
+
+ 
+  <section>
+    <div class="container">
+      <p class="section-label">The Journey</p>
+      <h2 class="section-title">My Story,<br/>From the Beginning</h2>
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <p class="timeline-year">The Early Years</p>
+          <h3 class="timeline-heading">Born in Kapseret, Uasin Gishu</h3>
+          <p class="timeline-text">
+            I was born and raised in Kapseret, Uasin Gishu County — a place that shaped who I am.
+            My childhood was filled with joy, laughter, and the warmth of friendships built through
+            the simple pleasure of playing games with other kids. I was always the social one,
+            drawing people in and making memories that still make me smile today.
+          </p>
+        </div>
+
+        <div class="timeline-item">
+          <p class="timeline-year">Primary School</p>
+          <h3 class="timeline-heading">St. George's Primary School</h3>
+          <p class="timeline-text">
+            My formal education began at St. George's Primary School, where I laid the foundations
+            that would carry me far. Curious by nature, I was always asking questions and looking
+            at the world with wonder and enthusiasm.
+          </p>
+        </div>
+
+        <div class="timeline-item">
+          <p class="timeline-year">Secondary School</p>
+          <h3 class="timeline-heading">Kebulonik Secondary School</h3>
+          <p class="timeline-text">
+            At Kebulonik Secondary School, I had grand ambitions — I dreamed of becoming an
+            <em>aeronautical engineer</em>, fascinated by the skies and the science of flight.
+            But life had a different and equally exciting plan in store for me.
+          </p>
+        </div>
+
+        <div class="timeline-item">
+          <p class="timeline-year">The Turning Point · Form Four</p>
+          <h3 class="timeline-heading">A Passion for Code Is Born</h3>
+          <p class="timeline-text">
+            It was during my final year of secondary school that everything changed. I discovered
+            software development — and the idea that you could build anything from just your
+            mind and a keyboard felt like pure magic. From that moment on, I never looked back.
+          </p>
+        </div>
+
+        <div class="timeline-item">
+          <p class="timeline-year">Today</p>
+          <h3 class="timeline-heading">Full Stack Development at ElDoHub, Eldoret</h3>
+          <p class="timeline-text">
+            Today, I am sharpening my craft as a Full Stack Software Development student at
+            <strong>ElDoHub</strong> in Eldoret. I'm building real-world projects — a business
+            website for a client, and <strong>HealthBox</strong>, an AI-powered wellness companion
+            app. Every day brings me closer to the developer I know I can become.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <div class="passion-strip">
+    <div class="container">
+      <div>
+        <p class="passion-quote">
+          "I want to own a successful <span>tech company</span> and help the next generation navigate a world driven by technology."
+        </p>
+      </div>
+      <div class="passion-body">
+        <p>
+          Technology is moving faster than ever, and I refuse to be left behind. My goal is not
+          just to keep up with advances in AI and software — but to use them as tools to
+          <strong style="color:#fff;">solve real problems</strong> for real people.
+        </p>
+        <p>
+          I believe the most powerful thing you can do with knowledge is pass it on. Empowering
+          the younger and upcoming generation in tech is at the very core of everything I am
+          building toward.
+        </p>
+      </div>
+    </div>
+  </div>
+
+ 
+  <section>
+    <div class="container">
+      <p class="section-label">What I'm Building With</p>
+      <h2 class="section-title">Skills &<br/>Technologies</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-icon"></div>
+          <p class="skill-name">Frontend Dev</p>
+          <p class="skill-desc">HTML, CSS, JavaScript — building clean, responsive interfaces.</p>
+        </div>
+        <div class="skill-card">
+         
+          <p class="skill-name">Backend Dev</p>
+          <p class="skill-desc">Server-side logic, APIs, and databases powering real applications.</p>
+        </div>
+        <div class="skill-card">
+          
+          <p class="skill-name">AI Integration</p>
+          <p class="skill-desc">Exploring how to leverage AI to build smarter, impactful solutions.</p>
+        </div>
+        <div class="skill-card">
+        
+          <p class="skill-name">Full Stack Projects</p>
+          <p class="skill-desc">End-to-end development from concept to deployed product.</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon"></div>
+          <p class="skill-name">HealthBox App</p>
+          <p class="skill-desc">AI-powered wellness companion — medication, food & health tracking.</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon"></div>
+          <p class="skill-name">Client Work</p>
+          <p class="skill-desc">Currently building a professional business website for a real client.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+ 
+  <section style="padding-top: 0;">
+    <div class="container">
+      <p class="section-label">Beyond the Screen</p>
+      <h2 class="section-title">What Makes<br/>Me, Me</h2>
+      <div class="hobbies-row">
+        <div class="hobby-pill"><span></span> Basketball</div>
+        <div class="hobby-pill"><span></span> Time with Children</div>
+        <div class="hobby-pill"><span></span> Building Projects</div>
+        <div class="hobby-pill"><span></span> Community & Giving Back</div>
+        <div class="hobby-pill"><span></span> Learning New Tech</div>
+      </div>
+      <p style="margin-top: 40px; font-size: 16px; line-height: 1.9; max-width: 680px; color: #4a4a5a;">
+        Outside of code, you'll find me on the basketball court or surrounded by children —
+        their energy, innocence, and curiosity bring me genuine happiness. There's something
+        about the way kids see the world that reminds me why I do what I do: to build a
+        better future for them.
+      </p>
+    </div>
+  </section>
+
+  <!-- DREAMS -->
+  <div class="dream-section">
+    <div class="container">
+      <p class="section-label">Looking Ahead</p>
+      <h2 class="section-title">Dreams &<br/>Goals</h2>
+      <div class="dream-grid">
+        <div class="dream-card">
+          <h3>Own a Successful Tech Company</h3>
+          <p>
+            My biggest dream is to build and lead a tech company that creates meaningful impact —
+            not just profitable products, but solutions that genuinely improve lives across Africa and beyond.
+          </p>
+        </div>
+        <div class="dream-card">
+          <h3> Empower the Next Generation</h3>
+          <p>
+            I want to be a bridge for young, aspiring developers — helping them enter a world where
+            technology is the most powerful tool they can wield. Mentorship and community are core to my vision.
+          </p>
+        </div>
+        <div class="dream-card">
+          <h3> Master AI & Emerging Tech</h3>
+          <p>
+            The AI wave is here. My goal is to stay ahead of it — deeply understanding AI tools
+            and using them to tackle meaningful, real-world problems in the tech industry.
+          </p>
+        </div>
+        <div class="dream-card">
+          <h3> Keep Building, Keep Growing</h3>
+          <p>
+            From hackathon projects to client work, every line of code I write today is a step
+            toward the developer and entrepreneur I am becoming. The journey has only just begun.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <footer>
+    <p>Crafted with passion by <strong>Godwill Kipchirchir</strong> · Full Stack Developer · Eldoret, Kenya</p>
+    <p style="margin-top: 8px; font-size: 11px; opacity: 0.5;">Born in Kapseret · Building the Future</p>
+  </footer>
+
+
 </body>
 </html>

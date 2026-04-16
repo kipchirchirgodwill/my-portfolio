@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CC Luxe Décor | Intimate Event Styling</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+       
+        :root {
+            --gold: #D4AF37;
+            --cream: #FFFDF5;
+            --dark-text: #2C2C2C;
+            --light-gold: #E5C76B;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--cream);
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+
+        nav {
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--gold); letter-spacing: 2px; }
+
+        .nav-links { list-style: none; display: flex; gap: 30px; }
+        .nav-links a { text-decoration: none; color: var(--dark-text); font-size: 0.9rem; transition: 0.3s; }
+        .nav-links a:hover { color: var(--gold); }
+
+      
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://via.placeholder.com/1920x1080/f5f5f5/D4AF37?text=Luxury+Setup+Photo') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; }
+        .hero p { font-size: 1.2rem; max-width: 600px; margin-bottom: 30px; }
+
+        .btn {
+            padding: 15px 40px;
+            background-color: var(--gold);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: 0.4s;
+        }
+        .btn:hover { background-color: var(--dark-text); transform: translateY(-3px); }
+
+    
+        .services { padding: 100px 10%; text-align: center; }
+        .services h2 { font-size: 2.5rem; margin-bottom: 50px; position: relative; }
+        .services h2::after { content: ''; display: block; width: 60px; height: 3px; background: var(--gold); margin: 15px auto; }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 40px 20px;
+            border: 1px solid #eee;
+            transition: 0.3s;
+        }
+        .service-card:hover { border-color: var(--gold); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .service-card h3 { color: var(--gold); margin-bottom: 15px; }
+
+       
+        .contact { background: white; padding: 100px 10%; text-align: center; }
+        .contact form { max-width: 600px; margin: 0 auto; text-align: left; }
+        .contact input, .contact textarea {
+            width: 100%; padding: 12px; margin: 10px 0 20px;
+            border: 1px solid #ddd; font-family: inherit;
+        }
+
+        /* --- FOOTER --- */
+        footer { padding: 50px; text-align: center; background: #222; color: #888; font-size: 0.8rem; }
+
+        /* --- MOBILE RESPONSIVENESS --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; } /* Simplified for code snippet */
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">CC LUXE DÉCOR</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero" id="home">
+        <h1>Elegant Moments, Intimately Styled</h1>
+        <p>Transforming your private spaces into unforgettable luxury experiences.</p>
+        <a href="#contact" class="btn">Inquire Now</a>
+    </header>
+
+    <section class="services" id="services">
+        <h2>Our Specialties</h2>
+        <div class="service-grid">
+            <div class="service-card">
+                <h3>Romantic Room Set-ups</h3>
+                <p>Curated floral and candlelit experiences for dates and anniversaries.</p>
+            </div>
+            <div class="service-card">
+                <h3>Proposal Surprises</h3>
+                <p>The perfect backdrop for your "Yes" moment, styled to perfection.</p>
+            </div>
+            <div class="service-card">
+                <h3>Intimate Event Styling</h3>
+                <p>Bespoke decor for birthdays and small private gatherings.</p>
+            </div>
+            <div class="service-card">
+                <h3>Welcome Home</h3>
+                <p>Thoughtful and grand decorations for a memorable return.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <h2>Let's Plan Your Surprise</h2>
+        <form>
+            <label>Full Name</label>
+            <input type="text" placeholder="Your Name">
+            
+            <label>Event Date</label>
+            <input type="date">
+            
+            <label>Message</label>
+            <textarea rows="5" placeholder="Tell us about your dream setup..."></textarea>
+            
+            <button type="submit" class="btn" style="width: 100%; cursor: pointer; border: none;">Send Inquiry</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>Contact us at info@ccluxedecor.com | </p>
+        <p>&copy; 2026 CC Luxe Décor. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
